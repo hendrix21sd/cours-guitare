@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>La gamme majeure et ses accords | Cours de guitare</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Zilla+Slab:wght@500;700&family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #F6F7F5;
+    --surface: #FFFFFF;
+    --ink: #1E2326;
+    --muted: #5B6469;
+    --line: #D9DDDB;
+    --wood: #4A2E20;
+    --fret: #C9CDD2;
+    --inlay: #D8CFBF;
+    --tone: #2A6F77;
+    --tone-soft: #DCEDEE;
+    --semi: #A8761F;
+    --semi-soft: #F6E9CF;
+    --dim: #6D5A8A;
+    --dim-soft: #ECE6F3;
+    --serif: "Zilla Slab", Rockwell, "Roboto Slab", Georgia, serif;
+    --sans: "Source Sans 3", "Segoe UI", system-ui, -apple-system, sans-serif;
+    box-sizing: border-box;
+    padding-top: env(safe-area-inset-top, 0px);
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #161A1C; --surface: #1F2427; --ink: #E8ECEA; --muted: #A3ADB1; --line: #343B3F;
+      --tone: #6FB7BE; --tone-soft: #1F3A3D; --semi: #E0B25C; --semi-soft: #3D3120;
+      --dim: #B7A3D6; --dim-soft: #2E2839; --inlay: #7A6450;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #161A1C; --surface: #1F2427; --ink: #E8ECEA; --muted: #A3ADB1; --line: #343B3F;
+    --tone: #6FB7BE; --tone-soft: #1F3A3D; --semi: #E0B25C; --semi-soft: #3D3120;
+    --dim: #B7A3D6; --dim-soft: #2E2839; --inlay: #7A6450;
+  }
+  *, *::before, *::after { box-sizing: inherit; }
+  html { scroll-padding-top: env(safe-area-inset-top, 0px); }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--sans);
+    font-size: 1.0625rem;
+    line-height: 1.6;
+  }
+  main { max-width: 46rem; margin: 0 auto; padding: 3rem 1.25rem 4rem; }
+  h1, h2, h3 { font-family: var(--serif); line-height: 1.2; font-weight: 700; }
+  h1 { font-size: clamp(2.1rem, 6vw, 3.1rem); margin: 0.2rem 0 1rem; }
+  h2 { font-size: 1.65rem; margin: 3.5rem 0 1rem; display: flex; gap: 0.7rem; align-items: baseline; }
+  h2 .num {
+    font-size: 1rem; color: var(--surface); background: var(--ink);
+    width: 1.8rem; height: 1.8rem; border-radius: 50%;
+    display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0;
+    transform: translateY(-0.15rem);
+  }
+  h3 { font-size: 1.3rem; margin: 2.5rem 0 0.8rem; }
+  p { margin: 0 0 1rem; max-width: 40rem; }
+  .kicker { color: var(--muted); margin: 0; }
+  .lead { font-size: 1.15rem; color: var(--muted); }
+  strong { font-weight: 700; }
+
+  /* Bande "tons / demi-tons" */
+  .strip { display: grid; margin: 1.5rem 0 3rem; position: relative; }
+  .strip.big { margin: 2.2rem 0 3.4rem; }
+  .seg {
+    position: relative; height: 3rem;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 600; font-size: 0.9rem; white-space: nowrap;
+    border-left: 3px solid var(--ink);
+  }
+  .seg:last-child { border-right: 3px solid var(--ink); }
+  .seg.tone { background: var(--tone-soft); color: var(--tone); }
+  .seg.semi { background: var(--semi-soft); color: var(--semi); }
+  .strip.big .seg { height: 4rem; font-size: 1.05rem; }
+  .note {
+    position: absolute; top: calc(100% + 0.35rem); left: 0; transform: translateX(-50%);
+    font-family: var(--serif); font-weight: 700; color: var(--ink); font-size: 1.05rem;
+  }
+  .note.end { left: auto; right: 0; transform: translateX(50%); }
+  .strip.big .note { font-size: 1.3rem; }
+
+  /* Manche */
+  .neck { margin: 1.5rem 0 0.5rem; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  .neck svg { display: block; min-width: 640px; width: 100%; height: auto; }
+  .neck .fretnum { fill: var(--muted); font: 600 12px var(--sans); }
+  .neck .arc-tone { stroke: var(--tone); }
+  .neck .arc-semi { stroke: var(--semi); }
+  .neck .lbl-tone { fill: var(--tone); font: 700 14px var(--sans); }
+  .neck .lbl-semi { fill: var(--semi); font: 700 14px var(--sans); }
+  .caption { color: var(--muted); font-size: 0.95rem; margin-top: 0.3rem; }
+
+  .tip {
+    border-left: 4px solid var(--semi); background: var(--surface);
+    padding: 1rem 1.2rem; margin: 1.5rem 0; border-radius: 0 6px 6px 0;
+  }
+  .tip p:last-child { margin-bottom: 0; }
+
+  /* Règle de la tierce */
+  .thirds { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; margin: 1.5rem 0; }
+  .third { background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 1.1rem 1.2rem 0.4rem; }
+  .third h4 { margin: 0 0 0.3rem; font-family: var(--serif); font-size: 1.15rem; }
+  .third p { font-size: 0.95rem; color: var(--muted); margin: 0; }
+  .third .strip { margin: 1rem 0.8rem 2.6rem; }
+  @media (max-width: 560px) { .thirds { grid-template-columns: 1fr; } }
+
+  /* Tableaux */
+  .table-wrap { overflow-x: auto; margin: 1.5rem 0; border: 1px solid var(--line); border-radius: 8px; background: var(--surface); }
+  table { border-collapse: collapse; width: 100%; font-size: 0.97rem; }
+  th, td { padding: 0.65rem 0.8rem; text-align: left; border-bottom: 1px solid var(--line); vertical-align: middle; }
+  tr:last-child td { border-bottom: none; }
+  thead th { font-weight: 700; color: var(--muted); font-size: 0.9rem; background: var(--bg); }
+  td.deg { font-family: var(--serif); font-weight: 700; font-size: 1.1rem; }
+  td.chord { font-weight: 700; white-space: nowrap; }
+  .compact th, .compact td { text-align: center; white-space: nowrap; }
+  .compact th[scope="row"] { text-align: left; color: var(--muted); font-weight: 600; background: var(--bg); }
+  .compact td.chord { font-family: var(--serif); font-size: 1.15rem; }
+
+  .t { display: inline-block; padding: 0.1rem 0.55rem; border-radius: 999px; font-size: 0.85rem; font-weight: 600; white-space: nowrap; }
+  .t.maj { background: var(--tone-soft); color: var(--tone); }
+  .t.min { background: var(--semi-soft); color: var(--semi); }
+  .t.dim { background: var(--dim-soft); color: var(--dim); }
+
+  /* Modèle des degrés */
+  .model { display: grid; grid-template-columns: repeat(7, 1fr); gap: 0.4rem; margin: 1.5rem 0 2rem; }
+  .model div { border-radius: 8px; padding: 0.8rem 0.2rem; text-align: center; }
+  .model b { display: block; font-family: var(--serif); font-size: 1.5rem; line-height: 1.1; }
+  .model span { font-size: 0.8rem; font-weight: 600; }
+  .model .maj { background: var(--tone-soft); color: var(--tone); }
+  .model .min { background: var(--semi-soft); color: var(--semi); }
+  .model .dim { background: var(--dim-soft); color: var(--dim); }
+  @media (max-width: 480px) { .model span { font-size: 0.7rem; } .model b { font-size: 1.2rem; } }
+
+  ul { padding-left: 1.3rem; }
+  li { margin-bottom: 0.35rem; }
+  .exercise { background: var(--ink); color: var(--bg); border-radius: 10px; padding: 1.4rem 1.5rem; margin-top: 3.5rem; }
+  .exercise h2 { margin-top: 0; }
+  .exercise p { color: var(--bg); }
+  .exercise p:last-child { margin-bottom: 0; }
+  footer { color: var(--muted); font-size: 0.9rem; margin-top: 3rem; border-top: 1px solid var(--line); padding-top: 1rem; }
+</style>
+</head>
+<body>
+<main>
+
+  <header>
+    <p class="kicker">Cours de guitare</p>
+    <h1>La gamme majeure et ses accords</h1>
+    <p class="lead">Toutes les gammes majeures se construisent avec la même formule. Une fois qu'on la connaît, on peut retrouver les notes et les accords de n'importe quelle tonalité.</p>
+    <div class="strip big" data-notes="Do,Ré,Mi,Fa,Sol,La,Si,Do" aria-label="Formule de la gamme majeure : 1 ton, 1 ton, demi-ton, 1 ton, 1 ton, 1 ton, demi-ton"></div>
+    <p class="caption">La largeur de chaque case est proportionnelle à l'écart : un ton est deux fois plus large qu'un demi-ton.</p>
+  </header>
+
+  <section>
+    <h2><span class="num">1</span>La gamme de Do majeur</h2>
+    <p>La gamme de Do majeur contient 7 notes : Do, Ré, Mi, Fa, Sol, La, Si, puis on revient au Do. Sa particularité : elle n'a aucune altération (ni dièse, ni bémol).</p>
+    <p>Une gamme est « majeure » à cause de l'écart entre ses notes, qui suit toujours la même formule : <strong>1 – 1 – ½ – 1 – 1 – 1 – ½</strong> (en tons).</p>
+    <p>Les deux demi-tons se trouvent entre <strong>Mi et Fa</strong>, et entre <strong>Si et Do</strong>. Ce sont les seuls endroits où deux notes naturelles sont collées.</p>
+
+    <div class="tip">
+      <p><strong>Sur la guitare :</strong> 1 ton = 2 cases, ½ ton = 1 case. Partez du Do (corde de La, 3<sup>e</sup> case) et suivez la formule sur une seule corde : vous jouez toute la gamme.</p>
+    </div>
+
+    <div class="neck" data-start="3" data-frets="15" data-notes="Do,Ré,Mi,Fa,Sol,La,Si,Do" role="img" aria-label="Gamme de Do majeur sur la corde de La, des cases 3 à 15"></div>
+    <p class="caption">La gamme de Do majeur sur la corde de La (cases 3, 5, 7, 8, 10, 12, 14, 15).</p>
+
+    <p>Cette formule fonctionne à partir de n'importe quelle note : pour obtenir la gamme de Sol majeur, de Ré majeur, etc., il suffit de partir de cette note et d'appliquer 1 – 1 – ½ – 1 – 1 – 1 – ½.</p>
+  </section>
+
+  <section>
+    <h2><span class="num">2</span>Les accords de la gamme</h2>
+    <p>Chaque note de la gamme est un <strong>degré</strong>, numéroté en chiffres romains (I, II, III…). Pour construire un accord de 3 sons sur un degré, on prend une note sur deux dans la gamme : la fondamentale, la tierce et la quinte. Par exemple, pour le degré I : Do (on saute Ré), Mi (on saute Fa), Sol.</p>
+    <p>L'écart entre la fondamentale et la tierce détermine si l'accord est majeur ou mineur :</p>
+
+    <div class="thirds">
+      <div class="third">
+        <h4>2 tons : accord majeur</h4>
+        <p>La tierce est majeure. Exemple : Do → Mi.</p>
+        <div class="strip" data-steps="2,2" data-notes="Do,Ré,Mi"></div>
+      </div>
+      <div class="third">
+        <h4>1 ton ½ : accord mineur</h4>
+        <p>La tierce est mineure. Exemple : Ré → Fa.</p>
+        <div class="strip" data-steps="2,1" data-notes="Ré,Mi,Fa"></div>
+      </div>
+    </div>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>Degré</th><th>Notes</th><th>Fondamentale → tierce</th><th>Accord</th></tr>
+        </thead>
+        <tbody>
+          <tr><td class="deg">I</td><td>Do – Mi – Sol</td><td>1 + 1 = 2 tons <span class="t maj">majeure</span></td><td class="chord">Do majeur (C)</td></tr>
+          <tr><td class="deg">II</td><td>Ré – Fa – La</td><td>1 + ½ = 1 ton ½ <span class="t min">mineure</span></td><td class="chord">Ré mineur (Dm)</td></tr>
+          <tr><td class="deg">III</td><td>Mi – Sol – Si</td><td>½ + 1 = 1 ton ½ <span class="t min">mineure</span></td><td class="chord">Mi mineur (Em)</td></tr>
+          <tr><td class="deg">IV</td><td>Fa – La – Do</td><td>1 + 1 = 2 tons <span class="t maj">majeure</span></td><td class="chord">Fa majeur (F)</td></tr>
+          <tr><td class="deg">V</td><td>Sol – Si – Ré</td><td>1 + 1 = 2 tons <span class="t maj">majeure</span></td><td class="chord">Sol majeur (G)</td></tr>
+          <tr><td class="deg">VI</td><td>La – Do – Mi</td><td>1 + ½ = 1 ton ½ <span class="t min">mineure</span></td><td class="chord">La mineur (Am)</td></tr>
+          <tr><td class="deg">VII</td><td>Si – Ré – Fa</td><td>½ + 1 = 1 ton ½ <span class="t min">mineure</span></td><td class="chord">Si diminué (B°)</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p>Ce sont toujours les demi-tons Mi–Fa et Si–Do qui « raccourcissent » la tierce et rendent l'accord mineur.</p>
+
+    <div class="tip">
+      <p><strong>Le cas particulier du VII (Si) :</strong> sa tierce est mineure, et sa quinte est elle aussi plus courte que d'habitude. De Si à Fa, il y a 3 tons, alors qu'une quinte normale en compte 3 ½ (comme Do → Sol). On l'appelle donc accord <strong>diminué</strong>. Il a un son tendu et instable, et on l'utilise moins souvent que les autres.</p>
+    </div>
+  </section>
+
+  <section>
+    <h2><span class="num">3</span>L'astuce à retenir</h2>
+    <p>Pas besoin de tout reconstruire à chaque fois ! Dans <strong>n'importe quelle gamme majeure</strong>, les accords suivent toujours le même modèle :</p>
+
+    <div class="model" aria-label="Modèle des degrés">
+      <div class="maj"><b>I</b><span>majeur</span></div>
+      <div class="min"><b>II</b><span>mineur</span></div>
+      <div class="min"><b>III</b><span>mineur</span></div>
+      <div class="maj"><b>IV</b><span>majeur</span></div>
+      <div class="maj"><b>V</b><span>majeur</span></div>
+      <div class="min"><b>VI</b><span>mineur</span></div>
+      <div class="dim"><b>VII</b><span>diminué</span></div>
+    </div>
+
+    <p>Les degrés <strong>I, IV et V</strong> sont toujours majeurs, les degrés <strong>II, III et VI</strong> toujours mineurs, et le degré <strong>VII</strong> toujours diminué. Il suffit donc de connaître les notes de la gamme pour trouver tous ses accords.</p>
+
+    <h3>Exemple 1 : la gamme de Sol majeur</h3>
+    <p>On part de Sol et on applique la formule :</p>
+    <div class="strip" data-notes="Sol,La,Si,Do,Ré,Mi,Fa#,Sol"></div>
+    <p>Attention au Fa ! Entre Mi et Fa, il n'y a qu'un demi-ton, alors que la formule demande 1 ton à cet endroit. On monte donc le Fa d'un demi-ton : il devient <strong>Fa dièse (Fa#)</strong>. C'est pour cela que la gamme de Sol majeur a un dièse.</p>
+
+    <div class="neck" data-start="3" data-frets="15" data-notes="Sol,La,Si,Do,Ré,Mi,Fa#,Sol" role="img" aria-label="Gamme de Sol majeur sur la corde de Mi grave, des cases 3 à 15"></div>
+    <p class="caption">Sur la corde de Mi grave, à partir de la 3<sup>e</sup> case : c'est exactement le même dessin que pour Do sur la corde de La.</p>
+
+    <div class="table-wrap">
+      <table class="compact">
+        <tbody>
+          <tr><th scope="row">Degré</th><td>I</td><td>II</td><td>III</td><td>IV</td><td>V</td><td>VI</td><td>VII</td></tr>
+          <tr><th scope="row">Note</th><td>Sol</td><td>La</td><td>Si</td><td>Do</td><td>Ré</td><td>Mi</td><td>Fa#</td></tr>
+          <tr><th scope="row">Type</th><td><span class="t maj">majeur</span></td><td><span class="t min">mineur</span></td><td><span class="t min">mineur</span></td><td><span class="t maj">majeur</span></td><td><span class="t maj">majeur</span></td><td><span class="t min">mineur</span></td><td><span class="t dim">diminué</span></td></tr>
+          <tr><th scope="row">Accord</th><td class="chord">G</td><td class="chord">Am</td><td class="chord">Bm</td><td class="chord">C</td><td class="chord">D</td><td class="chord">Em</td><td class="chord">F#°</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>Exemple 2 : la gamme de Ré majeur</h3>
+    <p>On part de Ré et on applique la même formule :</p>
+    <div class="strip" data-notes="Ré,Mi,Fa#,Sol,La,Si,Do#,Ré"></div>
+    <p>Cette fois, deux notes doivent être modifiées. Entre Mi et Fa, il faut 1 ton : le Fa devient <strong>Fa#</strong>. Entre Si et Do, il faut aussi 1 ton : le Do devient <strong>Do#</strong>. La gamme de Ré majeur a donc deux dièses.</p>
+
+    <div class="neck" data-start="0" data-frets="12" data-notes="Ré,Mi,Fa#,Sol,La,Si,Do#,Ré" role="img" aria-label="Gamme de Ré majeur sur la corde de Ré, de la corde à vide à la case 12"></div>
+    <p class="caption">Sur la corde de Ré, en partant de la corde à vide (cases 0, 2, 4, 5, 7, 9, 11, 12).</p>
+
+    <div class="table-wrap">
+      <table class="compact">
+        <tbody>
+          <tr><th scope="row">Degré</th><td>I</td><td>II</td><td>III</td><td>IV</td><td>V</td><td>VI</td><td>VII</td></tr>
+          <tr><th scope="row">Note</th><td>Ré</td><td>Mi</td><td>Fa#</td><td>Sol</td><td>La</td><td>Si</td><td>Do#</td></tr>
+          <tr><th scope="row">Type</th><td><span class="t maj">majeur</span></td><td><span class="t min">mineur</span></td><td><span class="t min">mineur</span></td><td><span class="t maj">majeur</span></td><td><span class="t maj">majeur</span></td><td><span class="t min">mineur</span></td><td><span class="t dim">diminué</span></td></tr>
+          <tr><th scope="row">Accord</th><td class="chord">D</td><td class="chord">Em</td><td class="chord">F#m</td><td class="chord">G</td><td class="chord">A</td><td class="chord">Bm</td><td class="chord">C#°</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p>Vous connaissez déjà la plupart de ces accords ! G, C, D, Em et Am, par exemple, forment l'une des familles d'accords les plus utilisées dans la musique populaire.</p>
+  </section>
+
+  <section class="exercise">
+    <h2>Pour la semaine prochaine</h2>
+    <p>Entraînez-vous à jouer la gamme de Do sur une corde, puis à enchaîner les accords C – Dm – Em – F – G – Am. Essayez d'entendre la différence de « couleur » entre un accord majeur et un accord mineur.</p>
+    <p>Pour les plus motivés, faites le même exercice en Sol majeur : G – Am – Bm – C – D – Em.</p>
+  </section>
+
+  <footer>
+    <p>Une question ? N'hésitez pas à m'écrire. [Votre prénom]</p>
+  </footer>
+
+</main>
+
+<script>
+  var MAJOR = [2, 2, 1, 2, 2, 2, 1]; // en demi-tons
+
+  // Bandes tons / demi-tons
+  document.querySelectorAll('.strip').forEach(function (el) {
+    var notes = el.dataset.notes.split(',');
+    var steps = el.dataset.steps ? el.dataset.steps.split(',').map(Number) : MAJOR;
+    el.style.gridTemplateColumns = steps.map(function (s) { return s + 'fr'; }).join(' ');
+    steps.forEach(function (s, i) {
+      var seg = document.createElement('div');
+      seg.className = 'seg ' + (s === 2 ? 'tone' : 'semi');
+      seg.textContent = s === 2 ? '1 ton' : '½';
+      var n = document.createElement('span');
+      n.className = 'note';
+      n.textContent = notes[i];
+      seg.appendChild(n);
+      if (i === steps.length - 1) {
+        var e = document.createElement('span');
+        e.className = 'note end';
+        e.textContent = notes[i + 1];
+        seg.appendChild(e);
+      }
+      el.appendChild(seg);
+    });
+  });
+
+  // Manches de guitare (une corde)
+  var NS = 'http://www.w3.org/2000/svg';
+  function mk(tag, attrs, text) {
+    var n = document.createElementNS(NS, tag);
+    for (var k in attrs) n.setAttribute(k, attrs[k]);
+    if (text !== undefined) n.textContent = text;
+    return n;
+  }
+  document.querySelectorAll('.neck').forEach(function (el) {
+    var start = Number(el.dataset.start);
+    var frets = Number(el.dataset.frets);
+    var notes = el.dataset.notes.split(',');
+    var unit = 54, nutX = 56, top = 70, bottom = 120, mid = 95;
+    var W = nutX + frets * unit + 16;
+    var svg = mk('svg', { viewBox: '0 0 ' + W + ' 152', 'aria-hidden': 'true' });
+
+    svg.appendChild(mk('rect', { x: nutX, y: top, width: frets * unit, height: bottom - top, fill: '#4A2E20', rx: 2 }));
+    [3, 5, 7, 9, 15].forEach(function (f) {
+      if (f <= frets) svg.appendChild(mk('circle', { cx: nutX + (f - 0.5) * unit, cy: mid, r: 5, fill: '#D8CFBF', opacity: 0.55 }));
+    });
+    if (frets >= 12) {
+      [mid - 14, mid + 14].forEach(function (y) {
+        svg.appendChild(mk('circle', { cx: nutX + 11.5 * unit, cy: y, r: 5, fill: '#D8CFBF', opacity: 0.55 }));
+      });
+    }
+    for (var f = 1; f <= frets; f++) {
+      var x = nutX + f * unit;
+      svg.appendChild(mk('line', { x1: x, y1: top, x2: x, y2: bottom, stroke: '#C9CDD2', 'stroke-width': 3 }));
+      svg.appendChild(mk('text', { x: nutX + (f - 0.5) * unit, y: 142, 'text-anchor': 'middle', 'class': 'fretnum' }, f));
+    }
+    svg.appendChild(mk('rect', { x: nutX - 6, y: top - 2, width: 7, height: bottom - top + 4, fill: '#EDE6D6' }));
+    svg.appendChild(mk('text', { x: nutX - 26, y: 142, 'text-anchor': 'middle', 'class': 'fretnum' }, '0'));
+    svg.appendChild(mk('line', { x1: 8, y1: mid, x2: W - 8, y2: mid, stroke: '#D9C9A8', 'stroke-width': 2.5 }));
+
+    var pos = [start];
+    MAJOR.forEach(function (s) { pos.push(pos[pos.length - 1] + s); });
+    function px(f) { return f === 0 ? nutX - 26 : nutX + (f - 0.5) * unit; }
+
+    MAJOR.forEach(function (s, i) {
+      var x1 = px(pos[i]) + 8, x2 = px(pos[i + 1]) - 8, xm = (x1 + x2) / 2;
+      var h = s === 2 ? 36 : 26;
+      svg.appendChild(mk('path', {
+        d: 'M' + x1 + ' ' + (mid - 20) + ' Q' + xm + ' ' + (mid - 20 - h * 1.6) + ' ' + x2 + ' ' + (mid - 20),
+        fill: 'none', 'stroke-width': 2, 'class': s === 2 ? 'arc-tone' : 'arc-semi'
+      }));
+      svg.appendChild(mk('text', {
+        x: xm, y: mid - 26 - h * 0.8 - 4, 'text-anchor': 'middle', 'class': s === 2 ? 'lbl-tone' : 'lbl-semi'
+      }, s === 2 ? '1' : '½'));
+    });
+
+    pos.forEach(function (f, i) {
+      var root = (i === 0 || i === pos.length - 1);
+      svg.appendChild(mk('circle', { cx: px(f), cy: mid, r: 17, fill: root ? '#E0B25C' : '#F7F3EA', stroke: '#2B1B12', 'stroke-width': 1.5 }));
+      svg.appendChild(mk('text', {
+        x: px(f), y: mid + 4.5, 'text-anchor': 'middle', fill: '#2B1B12',
+        'font-family': 'Source Sans 3, Segoe UI, sans-serif', 'font-weight': 700, 'font-size': notes[i].length > 2 ? 11 : 13
+      }, notes[i]));
+    });
+
+    el.appendChild(svg);
+  });
+</script>
+</body>
+</html>
